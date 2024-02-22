@@ -1,0 +1,43 @@
+﻿@page
+@model StoreManagement.Pages.Clients.DaoObject
+
+@{
+    DaoObject dobj = new DaoObject();
+    dobj.getConnection();
+    List<ClientInformation> clients = dobj.getAllClients();
+}
+
+<h2>List of Clients</h2>
+<a class="btn btn-primary btn-sm" href="/Clients/Create">Add Client</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var items in clients)
+        {
+        <tr>
+            <td>@items.getId()</td>
+            <td>@items.getName()</td>
+            <td>@items.getAddress()</td>
+            <td>@items.getEmail()</td>
+            <td>@items.getPhone()</td>
+            <td>@items.getCreate_at()</td>
+            <td>
+                <a href="/Clients/Edit?id=@items.getId()" class="btn btn-primary btn-sm">Edit</a>
+                <a href="/Clients/Delete?id=@items.getId()" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
